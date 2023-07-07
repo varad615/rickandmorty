@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rickmorty/screen/character.dart';
+import 'package:rickmorty/screen/episodes.dart';
 import 'package:rickmorty/screen/location.dart';
 
 class Home extends StatefulWidget {
@@ -12,7 +12,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
-  final tabs = [Character(), Location()];
+  final tabs = [const Character(), const Location(), const Episodes()];
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +27,17 @@ class _HomeState extends State<Home> {
           type: BottomNavigationBarType.shifting,
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: "Character's",
+                icon: Icon(Icons.groups),
+                label: "Characters",
                 backgroundColor: Color(0xFF2CC350)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.location_on),
-                label: "Home",
-                backgroundColor: Colors.red)
+                icon: Icon(Icons.language),
+                label: "Locations",
+                backgroundColor: Colors.red),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.tv),
+                label: "Episodes",
+                backgroundColor: Colors.blue)
           ],
           onTap: (index) {
             setState(() {

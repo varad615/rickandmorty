@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Character extends StatefulWidget {
-  Character({super.key});
+  const Character({super.key});
 
   @override
   State<Character> createState() => _CharacterState();
@@ -28,15 +28,21 @@ class _CharacterState extends State<Character> {
         final user = users[index];
         final gender = user['gender'];
         final character = user['image'];
+        final status = user['status'];
         final name = user['name'];
         return ListTile(
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: Image.network(character),
-          ),
-          title: Text(name.toString()),
-          subtitle: Text(gender),
-        );
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.network(character),
+            ),
+            title: Text(name.toString()),
+            subtitle: Text(gender),
+            trailing: ActionChip(
+                avatar: const Icon(Icons.favorite, color: Colors.red),
+                label: Text(
+                  status,
+                  style: const TextStyle(color: Colors.red),
+                )));
       },
     ));
   }

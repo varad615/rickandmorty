@@ -2,14 +2,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class Location extends StatefulWidget {
-  const Location({super.key});
+class Episodes extends StatefulWidget {
+  const Episodes({super.key});
 
   @override
-  State<Location> createState() => _LocationState();
+  State<Episodes> createState() => _EpisodesState();
 }
 
-class _LocationState extends State<Location> {
+class _EpisodesState extends State<Episodes> {
+  // called the above function
   @override
   void initState() {
     fetchUsers();
@@ -25,23 +26,21 @@ class _LocationState extends State<Location> {
       itemCount: users.length,
       itemBuilder: (context, index) {
         final user = users[index];
-        final type = user['type'];
+        final airdate = user['air_date'];
+
+        final episode = user['episode'];
         final name = user['name'];
         return ListTile(
-          // leading: ClipRRect(
-          //   borderRadius: BorderRadius.circular(100),
-          //   child: Image.network(character),
-          // ),
-          title: Text(name.toString()),
-          subtitle: Text(type),
-        );
+            title: Text(name.toString()),
+            subtitle: Text(airdate),
+            trailing: Text(episode));
       },
     ));
   }
 
   void fetchUsers() async {
-    print("Location Characters");
-    const url = "https://rickandmortyapi.com/api/location";
+    print("Fetching Episodes");
+    const url = "https://rickandmortyapi.com/api/episode";
     final uri = Uri.parse(url);
     final res = await http.get(uri);
     final body = res.body;
@@ -49,6 +48,6 @@ class _LocationState extends State<Location> {
     setState(() {
       users = json['results'];
     });
-    print('Location Fetched');
+    print('Episodes Fetched');
   }
 }
